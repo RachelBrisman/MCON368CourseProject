@@ -2,9 +2,11 @@ using MCON368CourseProject.Utils;
 
 namespace MCON368CourseProject.Menus;
 
-public class StudentManagementMenu
-{
-    public void run()
+public class StudentManagementMenu : Menu
+{        
+    NumberChooser choose = new NumberChooser();
+    
+    public override void run()
     {
         Console.WriteLine("STUDENT MANAGEMENT - PRESS Q TO RETURN TO PREVIOUS MENU\n" +
                           "Enter the number of the command you would like to use.");
@@ -12,7 +14,6 @@ public class StudentManagementMenu
                           "2. Search for student\n" +
                           "3. Display student details");
 
-        NumberChooser choose = new NumberChooser();
         int chosen = choose.ChooseNumber(3);
 
         switch (chosen)
@@ -22,11 +23,8 @@ public class StudentManagementMenu
                 main.run();
                 break;
             case 1: // TODO
-                Console.WriteLine("1. Add student record\n" +
-                                  "2. Update student record\n" +
-                                  "3. Delete Student record\n");
-
-                int choice = choose.ChooseNumber(3);
+                Menu records = new RecordMenu("student", this);
+                records.run();
                 break;
             case 2: // TODO
                 break;

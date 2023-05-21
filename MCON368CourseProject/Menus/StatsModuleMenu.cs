@@ -1,8 +1,8 @@
 namespace MCON368CourseProject.Menus;
 
-public class StatsModuleMenu
+public class StatsModuleMenu : Menu
 {
-    public void run()
+    public override void run()
     {
         Console.WriteLine("STATS MODULE - PRESS Q TO RETURN TO PREVIOUS MENU");
         Console.WriteLine("Number of Students Per Shiur");

@@ -2,9 +2,11 @@ using MCON368CourseProject.Utils;
 
 namespace MCON368CourseProject.Menus;
 
-public class RebbiManagementMenu
+public class RebbiManagementMenu : Menu
 {
-    public void run()
+    NumberChooser choose = new NumberChooser();
+
+    public override void run()
     {
         Console.WriteLine("REBBI MANAGEMENT - PRESS Q TO RETURN TO PREVIOUS MENU");
         Console.WriteLine("Enter the number of the command you would like to use.");
@@ -12,7 +14,6 @@ public class RebbiManagementMenu
                           "2. Assign Shiur to Rebbi\n" +
                           "3. Display Rebbi details");
         
-        NumberChooser choose = new NumberChooser();
         int chosen = choose.ChooseNumber(3);
 
         switch (chosen)
@@ -22,11 +23,8 @@ public class RebbiManagementMenu
                 main.run();
                 break;
             case 1: // TODO
-                Console.WriteLine("1. Add Rebbi record\n" +
-                                  "2. Update Rebbi record\n" +
-                                  "3. Delete Rebbi record\n");
-
-                int choice = choose.ChooseNumber(3);
+                Menu records = new RecordMenu("rebbi", this);
+                records.run();
                 break;
             case 2: // TODO
                 break;

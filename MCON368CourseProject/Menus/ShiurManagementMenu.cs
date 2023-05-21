@@ -2,9 +2,10 @@ using MCON368CourseProject.Utils;
 
 namespace MCON368CourseProject.Menus;
 
-public class ShiurManagementMenu
+public class ShiurManagementMenu : Menu
 {
-    public void run()
+    NumberChooser choose = new NumberChooser();
+    public override void run()
     {
         Console.WriteLine("SHIUR MANAGEMENT - PRESS Q TO RETURN TO PREVIOUS MENU");
         Console.WriteLine("Enter the number of the command you would like to use.");
@@ -13,7 +14,6 @@ public class ShiurManagementMenu
                           "3. Manage shiur enrollment\n" +
                           "4. Display shiur details");
         
-        NumberChooser choose = new NumberChooser();
         int chosen = choose.ChooseNumber(4);
 
         switch (chosen)
@@ -23,11 +23,8 @@ public class ShiurManagementMenu
                 main.run();
                 break;
             case 1: // TODO
-                Console.WriteLine("1. Add shiur record\n" +
-                                  "2. Update shiur record\n" +
-                                  "3. Delete shiur record\n");
-
-                int choice = choose.ChooseNumber(3);
+                Menu records = new RecordMenu("shiur", this);
+                records.run();
                 break;
             case 2: // TODO
                 break;
@@ -35,7 +32,7 @@ public class ShiurManagementMenu
                 Console.WriteLine("1. Enroll student in shiur\n" +
                                   "2. Un-enroll student in shiur\n");
                 
-                choice = choose.ChooseNumber(3);
+                int choice = choose.ChooseNumber(3);
                 break;
             case 4:
                 break;

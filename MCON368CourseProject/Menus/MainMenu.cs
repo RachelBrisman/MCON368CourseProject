@@ -22,16 +22,20 @@ public class MainMenu
                 Console.WriteLine("Thanks for using our System!");
                 break;
             case 1:
-                StudentManagementMenu studentPage = new StudentManagementMenu();
+                Menu studentPage = new StudentManagementMenu();
+                studentPage.run();
                 break;
             case 2:
-                ShiurManagementMenu shiurPage = new ShiurManagementMenu();
+                Menu shiurPage = new ShiurManagementMenu();
+                shiurPage.run();
                 break;
             case 3:
-                RebbiManagementMenu rebbiPage = new RebbiManagementMenu();
+                Menu rebbiPage = new RebbiManagementMenu();
+                rebbiPage.run();
                 break;
             case 4:
-                StatsModuleMenu stats = new StatsModuleMenu();
+                Menu stats = new StatsModuleMenu();
+                stats.run();
                 break;
         }
     }

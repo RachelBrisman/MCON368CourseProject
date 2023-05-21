@@ -6,6 +6,7 @@ public class NumberChooser
 {
     public int ChooseNumber(int max)
     {
+        Console.Write("Your choice: ");
         var result = Console.ReadLine();
         int final;
         while (isInvalidChoice(result, max, out final))
@@ -32,7 +33,7 @@ public class NumberChooser
     {
         if (int.TryParse(result, out var resultAsInt))
         {
-            if (resultAsInt > 1 && resultAsInt <= max)
+            if (resultAsInt > 0 && resultAsInt <= max)
             {
                 final = resultAsInt;
                 return true;
@@ -55,7 +56,3 @@ public class NumberChooser
         return false;
     }
 }
-
-// get number from user
-// check if q then exit
-// check if int within range
