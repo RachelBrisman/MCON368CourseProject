@@ -27,12 +27,13 @@ public class SearchMenu : Menu
         switch (choice)
         {
             case -1:
-                prevMenu.run();
                 break;
             case 1: // TODO
                 break;
             case 2: // TODO
                 break;
         }
+        
+        prevMenu.run();
     }
 }

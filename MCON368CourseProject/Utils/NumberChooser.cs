@@ -18,6 +18,20 @@ public class NumberChooser
         return final;
     }
 
+    public int ChooseNumberOnly(int max)
+    {
+        Console.Write("Your choice: ");
+        var result = Console.ReadLine();
+        int final;
+        while (!isIntInRange(result, max, out final))
+        {
+            Console.Write("Choose a valid number: ");
+            result = Console.ReadLine();
+        }
+
+        return final;
+    }
+    
     private bool isInvalidChoice(string result, int max, out int final)
     {
         if (isIntInRange(result, max, out final) || isExitCommand(result, out final))

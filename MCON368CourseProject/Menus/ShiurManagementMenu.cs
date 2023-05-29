@@ -1,3 +1,4 @@
+using MCON368CourseProject.DisplayDetails;
 using MCON368CourseProject.Utils;
 
 namespace MCON368CourseProject.Menus;
@@ -31,7 +32,6 @@ public class ShiurManagementMenu : Menu
             case 1: // TODO
                 Menu records = new RecordMenu("Shiur", this, db);
                 records.run();
-                this.run();
                 break;
             case 2: // TODO
                 break;
@@ -39,9 +39,12 @@ public class ShiurManagementMenu : Menu
                 Console.WriteLine("1. Enroll student in shiur\n" +
                                   "2. Un-enroll student in shiur\n");
                 
-                int choice = choose.ChooseNumber(3);
+                int choice = choose.ChooseNumber(2);
                 break;
             case 4:
+                DetailsDisplayer details = new ShiurDetailsDisplayer(db);
+                details.run();
+                this.run();
                 break;
         }
     }

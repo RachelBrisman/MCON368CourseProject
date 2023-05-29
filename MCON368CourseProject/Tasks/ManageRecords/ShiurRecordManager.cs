@@ -16,7 +16,8 @@ public class ShiurRecordManager : RecordManager
     
     public override void add()
     {
-        var name = letter.ChooseString("Name");
+        Console.Write("Name: ");
+        var name = Console.ReadLine();  
         
         Console.Write("Subject: ");
         var subject = Console.ReadLine();
@@ -68,7 +69,7 @@ public class ShiurRecordManager : RecordManager
             shiur.StartDate = Console.ReadLine();
         }
         
-        Console.WriteLine($"Rebbi: {shiur.Rebbi}");
+        Console.WriteLine($"Rebbi: {shiur.Rebbi.Name}");
         if (ChooseToUpdateOrKeep() == 1)
         {
             shiur.Rebbi = listAndPick.ARebbi("switch to");
@@ -92,6 +93,7 @@ public class ShiurRecordManager : RecordManager
         try
         {
             db.Shiur.Remove(shiur);
+            db.SaveChanges();
             Console.WriteLine("Shiur deleted successfully!\n");
         }
         catch (Exception e)

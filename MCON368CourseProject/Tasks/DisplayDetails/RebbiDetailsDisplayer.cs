@@ -11,10 +11,9 @@ public class RebbiDetailsDisplayer : DetailsDisplayer
 
     public override void run()
     {
-        // add shiurim
         foreach (var rebbi in db.Rebbi)
         {
-            Console.WriteLine($"Name: {rebbi.Name}. Address: {rebbi.Address}.\n");
+            Console.WriteLine(toString.RebbiToString(rebbi));
         }
     }
 }

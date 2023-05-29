@@ -57,7 +57,7 @@ public class StudentRecordManager : RecordManager
             student.Address = Console.ReadLine();
         }
         
-        Console.WriteLine($"Shiur: {student.Shiur}");
+        Console.WriteLine($"Shiur: {student.Shiur.Name}");
         if (ChooseToUpdateOrKeep() == 1)
         {            
             student.Shiur = listAndPick.AShiur("switch to");
@@ -80,6 +80,7 @@ public class StudentRecordManager : RecordManager
         try
         {
             db.Student.Remove(student);
+            db.SaveChanges();
             Console.WriteLine("Student deleted successfully!\n");
         }
         catch (Exception e)

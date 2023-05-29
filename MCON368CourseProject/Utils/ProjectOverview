@@ -13,23 +13,23 @@ You must connect to a real database system and use LINQ queries to extract the d
 Student Management - Students will build a module to manage student information, including:
 * Adding, updating, and deleting student records
 - Searching for students by name and ID
-- Displaying student details, including their enrolled Shiurim.
+* Displaying student details, including their enrolled Shiurim.
 
 Shiur Management - Students will develop a module for managing Shiur information, including:
 * Adding, updating, and deleting Shiur records
 - Assigning Rebbeim to Shiurim
 - Enrolling and unenrolling students in Shiurim
-- Displaying Shiur details, including enrolled students and assigned Rebbeim
+* Displaying Shiur details, including enrolled students and assigned Rebbeim
 
 Rebbe Management - Students will create a module for managing Rebbe information, including:
 * Adding, updating, and deleting Rebbe records
 - Assigning Shiurim to Rebbeim
-- Displaying Rebbe details, including their assigned Shiurim
+* Displaying Rebbe details, including their assigned Shiurim
 
 Stats Module - Students will need to provide a Stats module to summarize various data in the database, including:
 - Number of students enrolled in each Shiur
 - Number of students per Rebbe
-- Total number of Shiurim offered by the Yeshiva
+* Total number of Shiurim offered by the Yeshiva
 
 QS:
 how to update?

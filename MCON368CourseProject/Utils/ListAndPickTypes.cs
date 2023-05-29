@@ -22,8 +22,8 @@ public class ListAndPickTypes
 
         Console.WriteLine($"Which Rebbi would you like to {action}?");
         var rebbiCount = db.Rebbi.Count();
-        var rebbi = number.ChooseNumber(rebbiCount);
-        return db.Rebbi.ToList()[rebbi];
+        var rebbi = number.ChooseNumberOnly(rebbiCount);
+        return db.Rebbi.ToList()[rebbi-1];
     }
 
     public Student AStudent(string action)
@@ -38,8 +38,8 @@ public class ListAndPickTypes
 
         Console.WriteLine($"Which Student would you like to {action}?");
         var studentCount = db.Student.Count();
-        var student = number.ChooseNumber(studentCount);
-        return db.Student.ToList()[student];
+        var student = number.ChooseNumberOnly(studentCount);
+        return db.Student.ToList()[student-1];
     }
 
     public Shiur AShiur(string action)
@@ -54,7 +54,7 @@ public class ListAndPickTypes
 
         Console.WriteLine($"Which Shiur would you like to {action}?");
         var shiurCount = db.Shiur.Count();
-        var shiur = number.ChooseNumber(shiurCount);
-        return db.Shiur.ToList()[shiur];
+        var shiur = number.ChooseNumberOnly(shiurCount);
+        return db.Shiur.ToList()[shiur-1];
     }
 }

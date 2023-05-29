@@ -1,3 +1,4 @@
+using MCON368CourseProject.DisplayDetails;
 using MCON368CourseProject.Utils;
 
 namespace MCON368CourseProject.Menus;
@@ -28,13 +29,16 @@ public class RebbiManagementMenu : Menu
                 MainMenu main = new MainMenu(db);
                 main.run();
                 break;
-            case 1: // TODO
+            case 1:
                 Menu records = new RecordMenu("Rebbi", this, db);
                 records.run();
                 break;
             case 2: // TODO
                 break;
-            case 3: // TODO
+            case 3:
+                DetailsDisplayer details = new RebbiDetailsDisplayer(db);
+                details.run();
+                this.run();
                 break;
         }
     }

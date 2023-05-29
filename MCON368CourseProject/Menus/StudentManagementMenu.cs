@@ -30,14 +30,12 @@ public class StudentManagementMenu : Menu
                 main.run();
                 break;
             case 1: // TODO
-                Menu records = new RecordMenu("student", this, db);
+                Menu records = new RecordMenu("Student", this, db);
                 records.run();
-                this.run();
                 break;
             case 2: // TODO
                 Menu searches = new SearchMenu("Student", this, db);
                 searches.run();
-                this.run();
                 break;
             case 3: // TODO
                 DetailsDisplayer details = new StudentDetailsDisplayer(db);

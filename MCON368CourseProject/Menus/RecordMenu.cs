@@ -42,20 +42,17 @@ public class RecordMenu : Menu
         switch (choice)
         {
             case -1:
-                prevMenu.run();
                 break;
             case 1:
                 manager.add();
-                this.run();
                 break;
             case 2:
                 manager.update();
-                this.run();
                 break;
             case 3:
                 manager.delete();
-                this.run();
                 break;
         }
+        prevMenu.run();
     }
 }
