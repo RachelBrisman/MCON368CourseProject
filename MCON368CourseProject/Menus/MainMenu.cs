@@ -4,6 +4,12 @@ namespace MCON368CourseProject.Menus;
 
 public class MainMenu
 {
+    public YeshivaContext db;
+
+    public MainMenu(YeshivaContext database)
+    {
+        db = database;
+    }
     public void run()
     {
         Console.WriteLine("Welcome to the Yeshiva Management System! Press Q to Exit.\n" +
@@ -22,19 +28,19 @@ public class MainMenu
                 Console.WriteLine("Thanks for using our System!");
                 break;
             case 1:
-                Menu studentPage = new StudentManagementMenu();
+                Menu studentPage = new StudentManagementMenu(db);
                 studentPage.run();
                 break;
             case 2:
-                Menu shiurPage = new ShiurManagementMenu();
+                Menu shiurPage = new ShiurManagementMenu(db);
                 shiurPage.run();
                 break;
             case 3:
-                Menu rebbiPage = new RebbiManagementMenu();
+                Menu rebbiPage = new RebbiManagementMenu(db);
                 rebbiPage.run();
                 break;
             case 4:
-                Menu stats = new StatsModuleMenu();
+                Menu stats = new StatsModuleMenu(db);
                 stats.run();
                 break;
         }

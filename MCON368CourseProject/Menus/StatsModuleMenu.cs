@@ -2,6 +2,12 @@ namespace MCON368CourseProject.Menus;
 
 public class StatsModuleMenu : Menu
 {
+    public YeshivaContext db;
+
+    public StatsModuleMenu(YeshivaContext database)
+    {
+        db = database;
+    }
     public override void run()
     {
         Console.WriteLine("STATS MODULE - PRESS Q TO RETURN TO PREVIOUS MENU");

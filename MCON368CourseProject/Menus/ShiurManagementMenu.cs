@@ -5,6 +5,12 @@ namespace MCON368CourseProject.Menus;
 public class ShiurManagementMenu : Menu
 {
     NumberChooser choose = new NumberChooser();
+    public YeshivaContext db;
+
+    public ShiurManagementMenu(YeshivaContext database)
+    {
+        db = database;
+    }
     public override void run()
     {
         Console.WriteLine("SHIUR MANAGEMENT - PRESS Q TO RETURN TO PREVIOUS MENU");
@@ -19,12 +25,13 @@ public class ShiurManagementMenu : Menu
         switch (chosen)
         {
             case -1:
-                MainMenu main = new MainMenu();
+                MainMenu main = new MainMenu(db);
                 main.run();
                 break;
             case 1: // TODO
-                Menu records = new RecordMenu("shiur", this);
+                Menu records = new RecordMenu("Shiur", this, db);
                 records.run();
+                this.run();
                 break;
             case 2: // TODO
                 break;

@@ -11,7 +11,7 @@ public class NumberChooser
         int final;
         while (isInvalidChoice(result, max, out final))
         {
-            Console.WriteLine("Choose a valid number.");
+            Console.Write("Choose a valid number: ");
             result = Console.ReadLine();
         }
 

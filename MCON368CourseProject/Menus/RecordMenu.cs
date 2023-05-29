@@ -1,3 +1,4 @@
+using MCON368CourseProject.ManageRecords;
 using MCON368CourseProject.Utils;
 
 namespace MCON368CourseProject.Menus;
@@ -7,11 +8,26 @@ public class RecordMenu : Menu
     private string recordType;
     private NumberChooser choose = new NumberChooser();
     private Menu prevMenu;
+    private RecordManager manager;
+    public YeshivaContext db;
 
-    public RecordMenu(string type, Menu menu)
+    public RecordMenu(string type, Menu menu, YeshivaContext database)
     {
         recordType = type;
         prevMenu = menu;
+        db = database;
+        switch (type)
+        {
+            case "Student":
+                manager = new StudentRecordManager(db);
+                break;
+            case "Rebbi":
+                manager = new RebbiRecordManager(db);
+                break;
+            case "Shiur":
+                manager = new ShiurRecordManager(db);
+                break;
+        }
     }
     
     public override void run()
@@ -28,11 +44,17 @@ public class RecordMenu : Menu
             case -1:
                 prevMenu.run();
                 break;
-            case 1: // TODO
+            case 1:
+                manager.add();
+                this.run();
                 break;
-            case 2: // TODO
+            case 2:
+                manager.update();
+                this.run();
                 break;
-            case 3: // TODO
+            case 3:
+                manager.delete();
+                this.run();
                 break;
         }
     }

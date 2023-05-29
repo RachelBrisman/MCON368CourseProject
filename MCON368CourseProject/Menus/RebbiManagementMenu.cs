@@ -5,6 +5,12 @@ namespace MCON368CourseProject.Menus;
 public class RebbiManagementMenu : Menu
 {
     NumberChooser choose = new NumberChooser();
+    public YeshivaContext db;
+
+    public RebbiManagementMenu(YeshivaContext database)
+    {
+        db = database;
+    }
 
     public override void run()
     {
@@ -19,11 +25,11 @@ public class RebbiManagementMenu : Menu
         switch (chosen)
         {
             case -1:
-                MainMenu main = new MainMenu();
+                MainMenu main = new MainMenu(db);
                 main.run();
                 break;
             case 1: // TODO
-                Menu records = new RecordMenu("rebbi", this);
+                Menu records = new RecordMenu("Rebbi", this, db);
                 records.run();
                 break;
             case 2: // TODO

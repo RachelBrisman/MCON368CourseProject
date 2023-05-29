@@ -5,6 +5,12 @@ namespace MCON368CourseProject.Menus;
 public class StudentManagementMenu : Menu
 {        
     NumberChooser choose = new NumberChooser();
+    public YeshivaContext db;
+
+    public StudentManagementMenu(YeshivaContext database)
+    {
+        db = database;
+    }
     
     public override void run()
     {
@@ -19,14 +25,17 @@ public class StudentManagementMenu : Menu
         switch (chosen)
         {
             case -1:
-                MainMenu main = new MainMenu();
+                MainMenu main = new MainMenu(db);
                 main.run();
                 break;
             case 1: // TODO
-                Menu records = new RecordMenu("student", this);
+                Menu records = new RecordMenu("student", this, db);
                 records.run();
+                this.run();
                 break;
             case 2: // TODO
+                Menu searches = new SearchMenu("Student", this, db);
+                searches.run();
                 break;
             case 3: // TODO
                 break;
