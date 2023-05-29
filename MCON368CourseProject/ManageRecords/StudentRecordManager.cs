@@ -4,13 +4,14 @@ namespace MCON368CourseProject.ManageRecords;
 
 public class StudentRecordManager : RecordManager
 {
-    private NumberChooser number = new NumberChooser();
     private StringChooser letter = new StringChooser();
     public YeshivaContext db;
+    public ListAndPickTypes listAndPick;
 
     public StudentRecordManager(YeshivaContext database)
     {
-        db = database;
+        db = database;        
+        listAndPick = new ListAndPickTypes(db);
     }
     
     public override void add()
@@ -20,23 +21,14 @@ public class StudentRecordManager : RecordManager
         Console.Write("Address: ");
         var address = Console.ReadLine();
 
-        Console.WriteLine("Shiur Options: ");
-        var count = 1;
-        foreach (var s in db.Shiur)
-        {
-            Console.WriteLine($"{count}. {s.Name}");
-            count++;
-        }
-        Console.WriteLine("Which shiur is the student in?");
-        var shiurCount = db.Shiur.Count();
-        var shiur = number.ChooseNumber(shiurCount);
+        var shiur = listAndPick.AShiur("to place the student in");
 
         try
         {
             db.Student.Add(
             new Student { Name = name, 
                                Address = address, 
-                               Shiur = db.Shiur.ToList()[shiur]}
+                               Shiur = shiur}
             );
             db.SaveChanges();
             Console.WriteLine("Student added successfully!\n");
@@ -49,7 +41,7 @@ public class StudentRecordManager : RecordManager
 
     public override void update()
     {
-        var student = ListAndPickAStudent("update");
+        var student = listAndPick.AStudent("update");
         
         Console.WriteLine($"Name: {student.Name}");
         if (ChooseToUpdateOrKeep() == 1)
@@ -68,18 +60,7 @@ public class StudentRecordManager : RecordManager
         Console.WriteLine($"Shiur: {student.Shiur}");
         if (ChooseToUpdateOrKeep() == 1)
         {            
-            Console.WriteLine("Shiurs:");
-            var count = 1;
-            foreach (var s in db.Shiur)
-            {
-                Console.WriteLine($"{count}. {s.Name}");
-                count++;
-            }
-
-            Console.WriteLine("Which Shiur would you like for this Student");
-            var shiurCount = db.Shiur.Count();
-            var shiur = number.ChooseNumber(shiurCount);
-            student.Shiur = db.Shiur.ToList()[shiur];
+            student.Shiur = listAndPick.AShiur("switch to");
         }
 
         try
@@ -94,7 +75,7 @@ public class StudentRecordManager : RecordManager
 
     public override void delete()
     {
-        var student = ListAndPickAStudent("delete");
+        var student = listAndPick.AStudent("delete");
 
         try
         {
@@ -105,28 +86,5 @@ public class StudentRecordManager : RecordManager
         {
             Console.WriteLine("Something went wrong while trying to delete the Student.\n");
         }
-    }
-    
-    private int ChooseToUpdateOrKeep()
-    {
-        Console.WriteLine("1. Update\n2. Keep");
-        var choice = number.ChooseNumber(2);
-        return choice;
-    }
-
-    private Student ListAndPickAStudent(string action)
-    {
-        Console.WriteLine("Students:");
-        var count = 1;
-        foreach (var s in db.Student)
-        {
-            Console.WriteLine($"{count}. {s.Name}");
-            count++;
-        }
-
-        Console.WriteLine($"Which Student would you like to {action}?");
-        var studentCount = db.Student.Count();
-        var student = number.ChooseNumber(studentCount);
-        return db.Student.ToList()[student];
     }
 }

@@ -4,13 +4,14 @@ namespace MCON368CourseProject.ManageRecords;
 
 public class ShiurRecordManager : RecordManager
 {
-    private NumberChooser number = new NumberChooser();
     private StringChooser letter = new StringChooser();
     public YeshivaContext db;
+    public ListAndPickTypes listAndPick;
 
     public ShiurRecordManager(YeshivaContext database)
     {
-        db = database;
+        db = database;        
+        listAndPick = new ListAndPickTypes(db);
     }
     
     public override void add()
@@ -23,16 +24,8 @@ public class ShiurRecordManager : RecordManager
         Console.Write("Start Date: ");
         var startDate = Console.ReadLine();
 
-        Console.WriteLine("Which Rebbi?: ");
-        var count = 1;
-        foreach (var r in db.Rebbi)
-        {
-            Console.WriteLine($"{count}. {r.Name}");
-            count++;
-        }
-        Console.WriteLine("Which Rebbi teaches this shiur?");
-        var rebbiCount = db.Rebbi.Count();
-        var rebbi = number.ChooseNumber(rebbiCount);
+        
+        var rebbi = listAndPick.ARebbi("assign to this shiur");
 
         try
         {
@@ -40,7 +33,7 @@ public class ShiurRecordManager : RecordManager
                 new Shiur() { Name = name, 
                     Subject = subject, 
                     StartDate = startDate,
-                    Rebbi = db.Rebbi.ToList()[rebbi]}
+                    Rebbi = rebbi}
             );
             db.SaveChanges();
             Console.WriteLine("Shiur added successfully!\n");
@@ -52,7 +45,7 @@ public class ShiurRecordManager : RecordManager
 
     public override void update()
     {
-        var shiur = ListAndPickAShiur("update");
+        var shiur = listAndPick.AShiur("update");
         
         Console.WriteLine($"Name: {shiur.Name}");
         if (ChooseToUpdateOrKeep() == 1)
@@ -78,18 +71,7 @@ public class ShiurRecordManager : RecordManager
         Console.WriteLine($"Rebbi: {shiur.Rebbi}");
         if (ChooseToUpdateOrKeep() == 1)
         {
-            Console.WriteLine("Rebbis:");
-            var count = 1;
-            foreach (var r in db.Rebbi)
-            {
-                Console.WriteLine($"{count}. {r.Name}");
-                count++;
-            }
-
-            Console.WriteLine($"Which Rebbi would you like for this shiur?");
-            var rebbiCount = db.Rebbi.Count();
-            var rebbi = number.ChooseNumber(rebbiCount);
-            shiur.Rebbi = db.Rebbi.ToList()[rebbi];
+            shiur.Rebbi = listAndPick.ARebbi("switch to");
         }
 
         try
@@ -105,7 +87,7 @@ public class ShiurRecordManager : RecordManager
 
     public override void delete()
     {
-        var shiur = ListAndPickAShiur("delete");
+        var shiur = listAndPick.AShiur("delete");
 
         try
         {
@@ -116,28 +98,5 @@ public class ShiurRecordManager : RecordManager
         {
             Console.WriteLine("Something went wrong while trying to delete the Shiur\n");
         }
-    }
-    
-    private int ChooseToUpdateOrKeep()
-    {
-        Console.WriteLine("1. Update\n2. Keep");
-        var choice = number.ChooseNumber(2);
-        return choice;
-    }
-
-    public Shiur ListAndPickAShiur(string action)
-    {
-        Console.WriteLine("Shiurs:");
-        var count = 1;
-        foreach (var s in db.Shiur)
-        {
-            Console.WriteLine($"{count}. {s.Name}");
-            count++;
-        }
-
-        Console.WriteLine($"Which Shiur would you like to {action}?");
-        var shiurCount = db.Shiur.Count();
-        var shiur = number.ChooseNumber(shiurCount);
-        return db.Shiur.ToList()[shiur];
     }
 }

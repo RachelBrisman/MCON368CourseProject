@@ -4,13 +4,14 @@ namespace MCON368CourseProject.ManageRecords;
 
 public class RebbiRecordManager : RecordManager
 {
-    private NumberChooser number = new NumberChooser();
     private StringChooser letter = new StringChooser();
     public YeshivaContext db;
+    public ListAndPickTypes listAndPick;
 
     public RebbiRecordManager(YeshivaContext database)
     {
         db = database;
+        listAndPick = new ListAndPickTypes(db);
     }
     
     public override void add()
@@ -35,7 +36,7 @@ public class RebbiRecordManager : RecordManager
 
     public override void update()
     {
-        var rebbi = ListAndPickARebbi("update");
+        var rebbi = listAndPick.ARebbi("update");
         
         Console.WriteLine($"Name: {rebbi.Name}");
         if (ChooseToUpdateOrKeep() == 1)
@@ -64,7 +65,7 @@ public class RebbiRecordManager : RecordManager
 
     public override void delete()
     {
-        var rebbi = ListAndPickARebbi("delete");
+        var rebbi = listAndPick.ARebbi("delete");
 
         try
         {
@@ -76,28 +77,5 @@ public class RebbiRecordManager : RecordManager
         {
             Console.WriteLine("Something went wrong while trying to delete the Rebbi.\n");
         }
-    }
-
-    private int ChooseToUpdateOrKeep()
-    {
-        Console.WriteLine("1. Update\n2. Keep");
-        var choice = number.ChooseNumber(2);
-        return choice;
-    }
-
-    private Rebbi ListAndPickARebbi(string action)
-    {
-        Console.WriteLine("Rebbis:");
-        var count = 1;
-        foreach (var r in db.Rebbi)
-        {
-            Console.WriteLine($"{count}. {r.Name}");
-            count++;
-        }
-
-        Console.WriteLine($"Which Rebbi would you like to {action}?");
-        var rebbiCount = db.Rebbi.Count();
-        var rebbi = number.ChooseNumber(rebbiCount);
-        return db.Rebbi.ToList()[rebbi];
     }
 }
