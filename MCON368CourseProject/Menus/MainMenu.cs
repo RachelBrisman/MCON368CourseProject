@@ -30,22 +30,19 @@ public class MainMenu
             case 1:
                 Menu studentPage = new StudentManagementMenu(db);
                 studentPage.run();
-                this.run();
                 break;
             case 2:
                 Menu shiurPage = new ShiurManagementMenu(db);
                 shiurPage.run();
-                this.run();
                 break;
             case 3:
                 Menu rebbiPage = new RebbiManagementMenu(db);
                 rebbiPage.run();
-                this.run();
                 break;
             case 4:
                 Menu stats = new StatsModuleMenu(db);
                 stats.run();
-                this.run();
+                run();
                 break;
         }
     }

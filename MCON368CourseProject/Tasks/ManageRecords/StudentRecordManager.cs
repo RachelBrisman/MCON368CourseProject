@@ -16,7 +16,8 @@ public class StudentRecordManager : RecordManager
     
     public override void add()
     {
-        var name = letter.ChooseString("Name");
+        Console.Write("Name: ");
+        var name = Console.ReadLine();
         
         Console.Write("Address: ");
         var address = Console.ReadLine();
@@ -47,7 +48,7 @@ public class StudentRecordManager : RecordManager
         if (ChooseToUpdateOrKeep() == 1)
         {
             Console.Write("New Name: ");
-            student.Name = letter.ChooseString("Name");
+            student.Name = Console.ReadLine();
         }
         
         Console.WriteLine($"Address: {student.Address}");

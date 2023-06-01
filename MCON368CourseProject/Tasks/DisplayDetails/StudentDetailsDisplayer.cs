@@ -1,21 +1,30 @@
-namespace MCON368CourseProject.DisplayDetails;
+using MCON368CourseProject.Utils;
+
+namespace MCON368CourseProject.Tasks.DisplayDetails;
 
 
-public class StudentDetailsDisplayer : DetailsDisplayer
+public class StudentDetailsDisplayer
 {
     public YeshivaContext db;
+    public TypesToString ToString;
 
     public StudentDetailsDisplayer(YeshivaContext database)
     {
         db = database;
+        ToString = new TypesToString(db);
     }
 
-    public override void run()
+    public void RunSingle(Student student)
     {
-        // add rebbi
+        Console.WriteLine(ToString.StudentToString(student));
+    }
+    
+    public void run()
+    {
         foreach (var student in db.Student)
         {
-            Console.WriteLine(toString.StudentToString(student));
+            Console.WriteLine(ToString.StudentToString(student));
         }
+        Console.WriteLine();
     }
 }

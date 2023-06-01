@@ -66,9 +66,14 @@ public class RebbiRecordManager : RecordManager
     public override void delete()
     {
         var rebbi = listAndPick.ARebbi("delete");
+        var shiursWithRebbi = db.Shiur.Where(x => x.RebbiId == rebbi.RebbiID);
 
         try
         {
+            foreach (var r in shiursWithRebbi)
+            {
+                r.RebbiId = -1;
+            }
             db.Rebbi.Remove(rebbi);
             db.SaveChanges();
             Console.WriteLine("Rebbi deleted successfully!\n");

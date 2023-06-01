@@ -1,11 +1,12 @@
-using MCON368CourseProject.DisplayDetails;
+using MCON368CourseProject.Tasks.AssignAndEnroll;
+using MCON368CourseProject.Tasks.DisplayDetails;
 using MCON368CourseProject.Utils;
 
 namespace MCON368CourseProject.Menus;
 
 public class RebbiManagementMenu : Menu
 {
-    NumberChooser choose = new NumberChooser();
+    private NumberChooser choose = new NumberChooser();
     public YeshivaContext db;
 
     public RebbiManagementMenu(YeshivaContext database)
@@ -28,18 +29,20 @@ public class RebbiManagementMenu : Menu
             case -1:
                 MainMenu main = new MainMenu(db);
                 main.run();
-                break;
+                return;
             case 1:
                 Menu records = new RecordMenu("Rebbi", this, db);
                 records.run();
                 break;
-            case 2: // TODO
+            case 2:
+                AssignShiurToRebbi assign = new AssignShiurToRebbi(db);
+                assign.run();
                 break;
             case 3:
-                DetailsDisplayer details = new RebbiDetailsDisplayer(db);
+                RebbiDetailsDisplayer details = new RebbiDetailsDisplayer(db);
                 details.run();
-                this.run();
                 break;
         }
+        run();
     }
 }

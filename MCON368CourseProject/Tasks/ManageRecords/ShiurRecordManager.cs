@@ -89,9 +89,14 @@ public class ShiurRecordManager : RecordManager
     public override void delete()
     {
         var shiur = listAndPick.AShiur("delete");
+        var studentsInShiur = db.Student.Where(x => x.ShiurID == shiur.ShiurID);
 
         try
         {
+            foreach (var s in studentsInShiur)
+            {
+                s.ShiurID = -1;
+            }
             db.Shiur.Remove(shiur);
             db.SaveChanges();
             Console.WriteLine("Shiur deleted successfully!\n");

@@ -8,9 +8,9 @@ public class StringChooser
     {
         Console.Write($"Name: ");
         var result = Console.ReadLine();
-        while (!Regex.IsMatch(result, @"^[a-zA-Z]+$"))
+        while (!Regex.IsMatch(result, @"^[a-zA-Z\s]+$"))
         {
-            Console.Write($"Choose a valid {field}.");
+            Console.Write($"Choose a valid {field}: ");
             result = Console.ReadLine();
         }
 

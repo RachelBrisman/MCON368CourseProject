@@ -1,4 +1,4 @@
-using MCON368CourseProject.DisplayDetails;
+using MCON368CourseProject.Tasks.DisplayDetails;
 using MCON368CourseProject.Utils;
 
 namespace MCON368CourseProject.Menus;
@@ -28,20 +28,20 @@ public class StudentManagementMenu : Menu
             case -1:
                 MainMenu main = new MainMenu(db);
                 main.run();
-                break;
-            case 1: // TODO
+                return;
+            case 1:
                 Menu records = new RecordMenu("Student", this, db);
                 records.run();
                 break;
-            case 2: // TODO
+            case 2:
                 Menu searches = new SearchMenu("Student", this, db);
                 searches.run();
                 break;
-            case 3: // TODO
-                DetailsDisplayer details = new StudentDetailsDisplayer(db);
+            case 3:
+                StudentDetailsDisplayer details = new StudentDetailsDisplayer(db);
                 details.run();
-                this.run();
                 break;
         }
+        run();
     }
 }

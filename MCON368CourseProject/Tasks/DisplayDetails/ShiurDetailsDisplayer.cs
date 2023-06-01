@@ -1,19 +1,24 @@
-namespace MCON368CourseProject.DisplayDetails;
+using MCON368CourseProject.Utils;
 
-public class ShiurDetailsDisplayer : DetailsDisplayer
+namespace MCON368CourseProject.Tasks.DisplayDetails;
+
+public class ShiurDetailsDisplayer
 {
     public YeshivaContext db;
+    public TypesToString ToString;
 
     public ShiurDetailsDisplayer(YeshivaContext database)
     {
         db = database;
+        ToString = new TypesToString(db);
     }
 
-    public override void run()
+    public void run()
     {
         foreach (var shiur in db.Shiur)
         {
-            Console.WriteLine(toString.ShiurToString(shiur));
+            Console.WriteLine(ToString.ShiurToString(shiur));
         }
+        Console.WriteLine();
     }
 }

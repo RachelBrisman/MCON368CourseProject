@@ -1,11 +1,12 @@
-using MCON368CourseProject.DisplayDetails;
+using MCON368CourseProject.Tasks.AssignAndEnroll;
+using MCON368CourseProject.Tasks.DisplayDetails;
 using MCON368CourseProject.Utils;
 
 namespace MCON368CourseProject.Menus;
 
 public class ShiurManagementMenu : Menu
 {
-    NumberChooser choose = new NumberChooser();
+    private NumberChooser choose = new NumberChooser();
     public YeshivaContext db;
 
     public ShiurManagementMenu(YeshivaContext database)
@@ -28,24 +29,24 @@ public class ShiurManagementMenu : Menu
             case -1:
                 MainMenu main = new MainMenu(db);
                 main.run();
-                break;
-            case 1: // TODO
+                return;
+            case 1:
                 Menu records = new RecordMenu("Shiur", this, db);
                 records.run();
                 break;
-            case 2: // TODO
+            case 2:
+                AssignRebbiToShiur assign = new AssignRebbiToShiur(db);
+                assign.run();
                 break;
-            case 3: // TODO
-                Console.WriteLine("1. Enroll student in shiur\n" +
-                                  "2. Un-enroll student in shiur\n");
-                
-                int choice = choose.ChooseNumber(2);
+            case 3:
+                StudentEnrollment enroller = new StudentEnrollment(db);
+                enroller.run();
                 break;
             case 4:
-                DetailsDisplayer details = new ShiurDetailsDisplayer(db);
+                ShiurDetailsDisplayer details = new ShiurDetailsDisplayer(db);
                 details.run();
-                this.run();
                 break;
         }
+        run();
     }
 }
