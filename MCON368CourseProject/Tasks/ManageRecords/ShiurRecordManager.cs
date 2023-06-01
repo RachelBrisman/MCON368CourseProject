@@ -90,12 +90,13 @@ public class ShiurRecordManager : RecordManager
     {
         var shiur = listAndPick.AShiur("delete");
         var studentsInShiur = db.Student.Where(x => x.ShiurID == shiur.ShiurID);
+        var defaultShiur = db.Shiur.First().ShiurID;
 
         try
         {
             foreach (var s in studentsInShiur)
             {
-                s.ShiurID = -1;
+                s.ShiurID = defaultShiur;
             }
             db.Shiur.Remove(shiur);
             db.SaveChanges();

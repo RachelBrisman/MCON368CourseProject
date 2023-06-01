@@ -67,12 +67,13 @@ public class RebbiRecordManager : RecordManager
     {
         var rebbi = listAndPick.ARebbi("delete");
         var shiursWithRebbi = db.Shiur.Where(x => x.RebbiId == rebbi.RebbiID);
+        var defaultRebbi = db.Rebbi.First().RebbiID;
 
         try
         {
             foreach (var r in shiursWithRebbi)
             {
-                r.RebbiId = -1;
+                r.RebbiId = defaultRebbi;
             }
             db.Rebbi.Remove(rebbi);
             db.SaveChanges();

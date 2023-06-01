@@ -15,7 +15,7 @@ public class AssignShiurToRebbi
     
     public void run()
     {
-        Rebbi rebbi = ListAndPick.ARebbi("assign this shiur to");
+        Rebbi rebbi = ListAndPick.ARebbi("assign a shiur to");
         Shiur shiur = ListAndPick.AShiur($"pick for this {rebbi.Name}");
         try
         {

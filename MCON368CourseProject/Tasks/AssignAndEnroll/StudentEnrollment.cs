@@ -16,7 +16,7 @@ public class StudentEnrollment
     public void run()
     {
         Console.WriteLine("1. Enroll student in shiur\n" +
-                          "2. Un-enroll student in shiur\n");
+                          "2. Un-enroll student in shiur");
                 
         int choice = number.ChooseNumber(2);
         
